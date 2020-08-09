@@ -1,5 +1,9 @@
 ﻿namespace WebhooksServer.Models
 {
+    /// <summary>
+    /// Properties for a JSON web key.
+    /// Borrowed from https://github.com/IdentityServer/IdentityServer4/blob/main/src/IdentityServer4/src/Models/JsonWebKey.cs
+    /// </summary>
     public class JsonWebKey
     {
         public string kty { get; set; }

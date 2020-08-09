@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebhooksClient.Services;
 
@@ -15,15 +13,14 @@ namespace WebhooksClient.Controllers
             _signedHashValidatorService = signedHashValidatorService;
         }
 
-        [HttpPost("recieve")]
+        [HttpPost("receive")]
         public async Task<IActionResult> Index()
         {
+            // Read signature in from request header
             var signature = Request.Headers["X-Webhook-Signature"];
 
-            using StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8);
-            var bodyPayload =  await reader.ReadToEndAsync();
-
-            var result = await _signedHashValidatorService.Validate(signature, bodyPayload);
+            // Compare against body request stream
+            var result = await _signedHashValidatorService.ValidateAsync(signature, Request.Body);
 
             if (!result)
             {

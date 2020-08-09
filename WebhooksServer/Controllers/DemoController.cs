@@ -18,7 +18,7 @@ namespace WebhooksServer.Controllers
             _webhookMessageService = webhookMessageService;
         }
 
-        [HttpGet("keys")]
+        [HttpGet("Keys")]
         public IActionResult Keys()
         {
             var data = _certificateRepository.GetPublicKeys();
